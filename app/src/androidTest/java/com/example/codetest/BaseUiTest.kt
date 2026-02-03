@@ -6,12 +6,16 @@ import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
+import com.example.codetest.interactors.LastNameTxtBx
 import com.example.codetest.interactors.addToCartBtn
 import com.example.codetest.interactors.backHomeBtn
 import com.example.codetest.interactors.checkoutBtn
 import com.example.codetest.interactors.continueBtn
 import com.example.codetest.interactors.finishBtn
+import com.example.codetest.interactors.firstName
+import com.example.codetest.interactors.firstNameTxtBx
 import com.example.codetest.interactors.homePageText
+import com.example.codetest.interactors.lastName
 import com.example.codetest.interactors.loginBtn
 import com.example.codetest.interactors.logoutBtn
 import com.example.codetest.interactors.menuBtn
@@ -21,6 +25,10 @@ import com.example.codetest.interactors.testCartBtn
 import com.example.codetest.interactors.testError
 import com.example.codetest.interactors.usernameT
 import com.example.codetest.interactors.usernameTxt
+import com.example.codetest.interactors.wrongPwd
+import com.example.codetest.interactors.wrongUser
+import com.example.codetest.interactors.zipCode
+import com.example.codetest.interactors.zipTxtBx
 import org.junit.Before
 
 open class BaseUiTest {
@@ -87,10 +95,7 @@ open class BaseUiTest {
 
     //login
     fun login() {
-        device.wait(
-            Until.hasObject(loginBtn),
-            5000
-        )
+        loginIsDisplayed()
         device.findObject(
             usernameTxt
         ).text = usernameT
@@ -98,12 +103,7 @@ open class BaseUiTest {
             passwordTxt
         ).text = passwordT
         //device.pressBack()
-        val loginButton = device.wait(
-            Until.findObject(loginBtn),
-            5_000
-        )
-        requireNotNull(loginButton) { "LOGIN button not found" }
-        loginButton.click()
+        clickLoginBtn()
         validateHomePage()
     }
 
@@ -116,11 +116,28 @@ open class BaseUiTest {
                 )
             }
     */
+
+    fun setWrongUser() {
+        device.findObject(usernameTxt).text = wrongUser
+    }
+
+    fun setWrongPwd() {
+        device.findObject(passwordTxt).text = wrongPwd
+    }
     fun loginIsDisplayed() {
         device.wait(
             Until.hasObject(loginBtn),
             5000
         )
+    }
+
+    fun clickLoginBtn() {
+        val loginButton = device.wait(
+            Until.findObject(loginBtn),
+            5_000
+        )
+        requireNotNull(loginButton) { "LOGIN button not found" }
+        loginButton.click()
     }
 
 
@@ -152,6 +169,11 @@ open class BaseUiTest {
     //checkout info
     fun clickOnContinue() {
         waitUntilVisible(continueBtn).click()
+    }
+    fun completeForm() {
+        waitUntilVisible(firstNameTxtBx).text = firstName
+        waitUntilVisible(LastNameTxtBx).text = lastName
+        waitUntilVisible(zipTxtBx).text = zipCode
     }
     //finish checkout
     fun finishCheckout() {

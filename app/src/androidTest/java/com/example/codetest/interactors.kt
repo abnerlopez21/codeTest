@@ -23,8 +23,11 @@ object interactors {
     val checkoutBtn = By.desc("test-CHECKOUT")
     //checkout info
     val firstNameTxtBx = By.desc("test-First Name")
+    val firstName = "Abner"
     val LastNameTxtBx = By.desc("test-Last Name")
+    val lastName = "Lopez"
     val zipTxtBx = By.desc("test-Zip/Postal Code")
+    val zipCode = "64700"
     val continueBtn = By.desc("test-CONTINUE")
     //overview
     val finishBtn = By.desc("test-FINISH")

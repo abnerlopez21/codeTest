@@ -37,8 +37,8 @@ class ExampleInstrumentedTest : BaseUiTest() {
     fun loginFailTest() {
         // wrong user and password
         loginIsDisplayed()
-        device.findObject(usernameTxt).text = wrongUser
-        device.findObject(passwordTxt).text = wrongPwd
+        setWrongUser()
+        setWrongPwd()
         // click login button
         device.findObject(loginBtn).click()
         waitUntilVisible(testError)
@@ -54,9 +54,7 @@ class ExampleInstrumentedTest : BaseUiTest() {
         //checkout
         clickOnCheckout()
         //fill the checkout info
-        waitUntilVisible(firstNameTxtBx).text = "Abner"
-        waitUntilVisible(LastNameTxtBx).text = "Lopez"
-        waitUntilVisible(zipTxtBx).text = "67205"
+        completeForm()
         clickOnContinue()
         //finish checkout
         finishCheckout()

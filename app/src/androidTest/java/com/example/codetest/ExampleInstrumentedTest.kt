@@ -1,21 +1,9 @@
 package com.example.codetest
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.codetest.interactors.LastNameTxtBx
 import com.example.codetest.interactors.addToCartBtn
-import com.example.codetest.interactors.backHomeBtn
-import com.example.codetest.interactors.checkoutBtn
-import com.example.codetest.interactors.continueBtn
-import com.example.codetest.interactors.finishBtn
-import com.example.codetest.interactors.firstNameTxtBx
 import com.example.codetest.interactors.loginBtn
-import com.example.codetest.interactors.passwordTxt
-import com.example.codetest.interactors.testCartBtn
 import com.example.codetest.interactors.testError
-import com.example.codetest.interactors.usernameTxt
-import com.example.codetest.interactors.wrongPwd
-import com.example.codetest.interactors.wrongUser
-import com.example.codetest.interactors.zipTxtBx
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith

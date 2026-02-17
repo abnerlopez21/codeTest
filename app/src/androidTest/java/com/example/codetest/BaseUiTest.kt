@@ -75,22 +75,43 @@ open class BaseUiTest {
     //scroll
     fun scrollUntilVisible(
         selector: BySelector,
-        maxSwipes: Int = 5
+        timeoutMs: Long = 10_000,
+        swipeSteps: Int = 30
     ): UiObject2 {
 
-        repeat(maxSwipes) {
-            device.findObject(selector)?.let { return it }
+        val startTime = System.currentTimeMillis()
+
+        var lastBottom: Int? = null
+
+        while (System.currentTimeMillis() - startTime < timeoutMs) {
+
+            device.waitForIdle()
+
+            val obj = device.findObject(selector)
+            if (obj != null && obj.visibleBounds.height() > 0) {
+                return obj
+            }
+
+            val scrollable = device.findObject(By.scrollable(true))
+            val currentBottom = scrollable?.visibleBounds?.bottom
+
+            // stop scrolling
+            if (lastBottom != null && currentBottom == lastBottom) {
+                break
+            }
+
+            lastBottom = currentBottom
 
             device.swipe(
                 device.displayWidth / 2,
                 device.displayHeight * 3 / 4,
                 device.displayWidth / 2,
                 device.displayHeight / 4,
-                20
+                swipeSteps
             )
         }
 
-        throw AssertionError("Object not found after scrolling: $selector")
+        throw AssertionError("Object not found after ${timeoutMs}ms: $selector")
     }
 
     //login

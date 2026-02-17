@@ -30,5 +30,7 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86_64
-          profile: pixel_4
+          profile: pixel_5
+          emulator-options: "-no-accel -no-snapshot -noaudio -no-boot-anim"
+          timeout: 600
           script: ./gradlew connectedCheck
